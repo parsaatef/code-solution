@@ -1,0 +1,178 @@
+{
+	"currentUser": "team-a",
+	"services": [
+		{
+			"name": "artist-lookup",
+			"system": "artist-engagement-portal",
+			"owner": "team-a",
+			"lifecycle": "experimental",
+			"description": "Ingestion subsystem of the Wayback Archive",
+			"tags": ["java", "data"],
+			"providedAPIs": [
+				{
+					"name": "podcast-api",
+					"system": "podcast",
+					"owner": "team-b",
+					"lifecycle": "experimental",
+					"type": "lorem ipsum",
+					"description": "Podcast API"
+				},
+				{
+					"name": "podcast-api2",
+					"system": "podcast",
+					"owner": "team-b",
+					"lifecycle": "experimental",
+					"type": "lorem ipsum",
+					"description": "Podcast API"
+				},
+				{
+					"name": "podcast-api3",
+					"system": "podcast",
+					"owner": "team-b",
+					"lifecycle": "experimental",
+					"type": "lorem ipsum",
+					"description": "Podcast API"
+				},
+				{
+					"name": "podcast-api4",
+					"system": "podcast",
+					"owner": "team-b",
+					"lifecycle": "experimental",
+					"type": "lorem ipsum",
+					"description": "Podcast API"
+				}
+			],
+			"consumedAPIs": []
+		},
+		{
+			"name": "playback-order",
+			"system": "audio-playback",
+			"owner": "user:guest",
+			"lifecycle": "production",
+			"description": "Playback Order Description",
+			"tags": ["java", "playback"],
+			"providedAPIs": [],
+			"consumedAPIs": [
+				{
+					"name": "podcast-api",
+					"system": "podcast",
+					"owner": "team-b",
+					"lifecycle": "experimental",
+					"type": "lorem ipsum",
+					"description": "Podcast API"
+				}
+			]
+		},
+		{
+			"name": "podcast-api",
+			"system": "podcast",
+			"owner": "team-b",
+			"lifecycle": "experimental",
+			"description": "Podcast API Description",
+			"tags": ["java"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "shuffle-api",
+			"system": "audio-playback",
+			"owner": "team-a",
+			"lifecycle": "production",
+			"description": "Shuffle API Description",
+			"tags": ["go"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "artist-lookup-A",
+			"system": "artist-engagement-portal",
+			"owner": "team-a",
+			"lifecycle": "experimental",
+			"description": "Ingestion subsystem of the Wayback Archive",
+			"tags": ["java", "data"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "B-playback-order",
+			"system": "audio-playback",
+			"owner": "user:guest",
+			"lifecycle": "experimental",
+			"description": "Playback Order Description Version B",
+			"tags": ["java", "playback", "PHP"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "w-podcast-api",
+			"system": "podcast",
+			"owner": "team-a",
+			"lifecycle": "experimental",
+			"description": "Podcast API Description version W",
+			"tags": ["java"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "shuffle-api-Z",
+			"system": "audio-playback",
+			"owner": "team-b",
+			"lifecycle": "production",
+			"description": "Shuffle API Description version Z",
+			"tags": ["go"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "artist-lookup-K",
+			"system": "artist-engagement-portal",
+			"owner": "team-a",
+			"lifecycle": "experimental",
+			"description": "Ingestion subsystem of the Wayback Archive",
+			"tags": ["java", "data"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "G-playback-order",
+			"system": "audio-playback",
+			"owner": "user:guest",
+			"lifecycle": "experimental",
+			"description": "Playback Order Description Version G",
+			"tags": ["java", "playback", "PHP"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "podcast-api-M",
+			"system": "podcast",
+			"owner": "team-a",
+			"lifecycle": "experimental",
+			"description": "Podcast API Description version M",
+			"tags": ["java"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "L-shuffle-api",
+			"system": "audio-playback",
+			"owner": "team-b",
+			"lifecycle": "production",
+			"description": "Shuffle API Description version L",
+			"tags": ["go"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		},
+		{
+			"name": "shuffle-api-N",
+			"system": "podcast",
+			"owner": "team-a",
+			"lifecycle": "production",
+			"description": "Shuffle API Description version N",
+			"tags": ["go", "python"],
+			"providedAPIs": [],
+			"consumedAPIs": []
+		}
+	],
+	"tags": ["data", "go", "java", "playback", "website", "python", "PHP"]
+}
