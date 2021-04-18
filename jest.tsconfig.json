@@ -6,6 +6,7 @@
 		"sourceMap": false,
 		"experimentalDecorators": true,
 		"noImplicitUseStrict": true,
+		"esModuleInterop": true,
 		"removeComments": true,
 		"moduleResolution": "node",
 		"lib": ["es2017", "dom"],

@@ -1,42 +1,13 @@
 import React from "react";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import StarIcon from "@material-ui/icons/Star";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { ListFrame, FilterList } from "./List.styled";
 import { Fragment } from "react";
 import Typography from "@material-ui/core/Typography";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { useAppState } from "../../app/store";
 import { currentUser } from "../../dummyData/data.json";
-import { changeTypeFilter } from "../../app/actions";
-
-const FilterListItem = (props) => {
-	const { count, Icon, title, id, selectedId, handleClick } = props;
-
-	const [selected, setSelected] = React.useState(false);
-
-	React.useEffect(() => {
-		setSelected(id === selectedId);
-	}, [id, selectedId]);
-
-	return (
-		<ListItem
-			onClick={handleClick.bind(null, id)}
-			selected={selected}
-			button
-		>
-			{Icon && (
-				<ListItemIcon>
-					<Icon fontSize="small" />
-				</ListItemIcon>
-			)}
-			<ListItemText primary={title} />
-			<ListItemSecondaryAction>{count}</ListItemSecondaryAction>
-		</ListItem>
-	);
-};
+import { changeTypeFilter, ServiceTypeFilters } from "../../app/actions";
+import FilterListItem from "./FilterListItem";
 
 const ServiceTypeFilter = () => {
 	const { state, dispatch } = useAppState();
@@ -68,7 +39,7 @@ const ServiceTypeFilter = () => {
 		},
 	];
 
-	const handleClick = (id) => {
+	const handleClick = (id: ServiceTypeFilters) => {
 		dispatch(changeTypeFilter(id));
 	};
 

@@ -7,12 +7,17 @@ import {
 	SEARCH_FILTER,
 	LOAD_SERVICES,
 } from "./constants";
-import { AppActions } from "./actions";
+import { AppActions, ServiceTypeFilters } from "./actions";
 import { getFilteredServices } from "./servicesFilter";
+import { ServiceModel } from "../types";
 
 export interface AppState {
-	username: string;
-	isAuth: boolean;
+	favorites: ServiceModel["name"][];
+	tagsFilter: string[];
+	typeFilter: ServiceTypeFilters;
+	search: string;
+	services: ServiceModel[];
+	allServices: ServiceModel[];
 }
 
 const initial = {
@@ -24,7 +29,7 @@ const initial = {
 	allServices: [],
 };
 
-export const initialState =
+export const initialState: AppState =
 	typeof window !== "undefined"
 		? JSON.parse(window.localStorage.getItem("appData") as string) ||
 		  initial
@@ -35,7 +40,7 @@ export const reducer = (state = initialState, action: AppActions): AppState => {
 
 	let payload = action.payload;
 
-	const { services, favorites, tagsFilter, typeFilter, search } = state;
+	const { favorites, tagsFilter, typeFilter, search } = state;
 
 	const name = payload.name;
 	const tag = payload.tag;

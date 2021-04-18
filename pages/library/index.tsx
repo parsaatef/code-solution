@@ -6,7 +6,6 @@ const Library = () => {
 		<div>
 			<Head>
 				<title>Libraries</title>
-				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
 				<Box mt={5} pl={3}>

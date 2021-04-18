@@ -6,7 +6,6 @@ const SystemDetailPage = () => {
 		<div>
 			<Head>
 				<title>System Detail Page</title>
-				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
 				<Box mt={5} pl={3}>

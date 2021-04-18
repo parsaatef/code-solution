@@ -14,12 +14,14 @@ export default class MyDocument extends Document {
 						content={theme.palette.primary.main}
 					/>
 					<link
-						rel="stylesheet"
+						rel="preload"
 						href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+						as="font"
 					/>
 					<link
-						rel="stylesheet"
+						rel="preload"
 						href="https://fonts.googleapis.com/icon?family=Material+Icons"
+						as="font"
 					/>
 				</Head>
 				<body>

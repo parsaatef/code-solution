@@ -6,7 +6,6 @@ const Documentation = () => {
 		<div>
 			<Head>
 				<title>Documentations</title>
-				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
 				<Box mt={5} pl={3}>

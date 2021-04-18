@@ -1,8 +1,7 @@
 import React from "react";
 import Header from "./header/Header";
-import Navigation from "./navigation/Navigation";
+import Navigation, { NavItem } from "./navigation/Navigation";
 import { useRouter } from "next/router";
-import NavigationDetail from "./navigation/NavigationDetail";
 
 interface Props {
 	children: React.ReactNode;
@@ -13,16 +12,63 @@ const Layout: React.FC<Props> = (props) => {
 
 	const router = useRouter();
 
-	const { serviceId } = router.query;
+	const { serviceId }: { serviceId?: string } = router.query;
+
+	const currentPath = router.asPath;
+
+	let items: NavItem[] = [];
+
+	if (!serviceId) {
+		items = [
+			{
+				id: "services",
+				text: "Services",
+				href: `/service`,
+			},
+			{
+				id: "website",
+				text: "Websites",
+				href: `/website`,
+			},
+			{
+				id: "library",
+				text: "Libraries",
+				href: `/library`,
+			},
+			{
+				id: "documentation",
+				text: "Documentations",
+				href: `/documentation`,
+			},
+		];
+	} else {
+		items = [
+			{
+				id: "overview",
+				text: "Overview",
+				href: `/service/${serviceId}/overview`,
+			},
+			{
+				id: "cicd",
+				text: "CI/CD",
+				href: `/service/${serviceId}/cicd`,
+			},
+			{
+				id: "api",
+				text: "API",
+				href: `/service/${serviceId}/api`,
+			},
+		];
+	}
 
 	return (
 		<div>
-			<Header />
-			{!serviceId ? (
-				<Navigation />
-			) : (
-				<NavigationDetail currentService={serviceId} />
-			)}
+			<Header title={serviceId} />
+			<Navigation
+				currentPath={currentPath}
+				items={items}
+				key={!serviceId ? "main" : "detail"}
+			/>
 			<section>{children}</section>
 		</div>
 	);

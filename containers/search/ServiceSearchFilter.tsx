@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Search } from "@material-ui/icons";
-import { useAppState } from "../app/store";
-import { searchFilter } from "../app/actions";
+import { useAppState } from "../../app/store";
+import { searchFilter } from "../../app/actions";
 
 const ServiceSearchFilter = () => {
 	const { state, dispatch } = useAppState();

@@ -7,39 +7,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import EnhancedTableHead from "./TableHead";
 import { PaperTable, Wrapper, MainTable, TableHeading } from "./Table.styled";
-import TextField from "@material-ui/core/TextField";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import { Search } from "@material-ui/icons";
-import { Box } from "@material-ui/core";
-
-function descendingComparator(a, b, orderBy) {
-	if (b[orderBy] < a[orderBy]) {
-		return -1;
-	}
-	if (b[orderBy] > a[orderBy]) {
-		return 1;
-	}
-	return 0;
-}
-
-function getComparator(order, orderBy) {
-	return order === "desc"
-		? (a, b) => descendingComparator(a, b, orderBy)
-		: (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function stableSort(array, comparator) {
-	const stabilizedThis = array.map((el, index) => [el, index]);
-	stabilizedThis.sort((a, b) => {
-		const order = comparator(a[0], b[0]);
-		if (order !== 0) return order;
-		return a[1] - b[1];
-	});
-	return stabilizedThis.map((el) => el[0]);
-}
-
-export type Order = "asc" | "desc";
+import { Order } from "../../../types";
+import { getComparator, stableSort } from "../../../helper/utility";
 
 export type DataRow = Record<string, any>;
 
@@ -63,33 +32,29 @@ const EnhancedTable: React.FC<Props> = (props) => {
 	const { toolbar, heading, rows, cols } = props;
 
 	const [order, setOrder] = React.useState<Order>("asc");
-	const [orderBy, setOrderBy] = React.useState("calories");
+	const [orderBy, setOrderBy] = React.useState<keyof DataRow>("calories");
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-	const handleRequestSort = (event, property) => {
+	const handleRequestSort = (
+		event: React.MouseEvent<unknown>,
+		property: keyof DataRow
+	) => {
 		const isAsc = orderBy === property && order === "asc";
 		setOrder(isAsc ? "desc" : "asc");
 		setOrderBy(property);
 	};
 
-	const handleChangePage = (event, newPage) => {
+	const handleChangePage = (event: unknown, newPage: number) => {
 		setPage(newPage);
 	};
 
-	const handleChangeRowsPerPage = (event) => {
+	const handleChangeRowsPerPage = (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
-
-	console.log("row----", rows, page);
-
-	/*React.useEffect(() => {
-		const pageCount = Math.floor(rows.length / rowsPerPage);
-		if (pageCount < page) {
-			setPage(pageCount);
-		}
-	}, [rows]);*/
 
 	return (
 		<Wrapper>

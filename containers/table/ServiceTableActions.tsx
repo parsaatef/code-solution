@@ -1,19 +1,20 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import { yellow } from "@material-ui/core/colors";
-import { useAppState } from "../app/store";
-import { addToFavorite, removeFromFavorite } from "../app/actions";
+import { useAppState } from "../../app/store";
+import { addToFavorite, removeFromFavorite } from "../../app/actions";
 import { useRouter } from "next/router";
-import styled from "styled-components";
+import { WrapperCursor } from "../../components/styled/general";
+import { ServiceModel } from "../../types";
 
-const Wrapper = styled.div`
-	cursor: pointer;
-`;
+interface Props {
+	row: ServiceModel;
+}
 
-const ServiceTableActions = (props) => {
+const ServiceTableActions: React.FC<Props> = (props) => {
 	const { row } = props;
 
 	const { name } = row;
@@ -43,7 +44,7 @@ const ServiceTableActions = (props) => {
 	};
 
 	return (
-		<Wrapper>
+		<WrapperCursor>
 			<OpenInNewIcon
 				onClick={openDetail}
 				color="action"
@@ -63,7 +64,7 @@ const ServiceTableActions = (props) => {
 					fontSize="small"
 				/>
 			)}
-		</Wrapper>
+		</WrapperCursor>
 	);
 };
 

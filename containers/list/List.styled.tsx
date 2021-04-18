@@ -1,5 +1,6 @@
 import { List } from "@material-ui/core";
 import styled from "styled-components";
+import { ThemeProps } from "../../types";
 
 export const ListFrame = styled.section`
 	background: #2d2d2d;
@@ -9,6 +10,8 @@ export const ListFrame = styled.section`
 	max-width: 360px;
 `;
 
-export const FilterList = styled(List)`
-	background: #333;
+export const FilterList = styled((props) => <List {...props} />)`
+	${({ theme }: ThemeProps) => `
+		background: ${theme.palette.background.default};
+	`}
 `;

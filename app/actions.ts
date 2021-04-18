@@ -1,3 +1,4 @@
+import { ServiceModel } from "../types";
 import {
 	ADD_TO_FAVORITE,
 	REMOVE_FROM_FAVORITE,
@@ -9,58 +10,48 @@ import {
 } from "./constants";
 
 export interface Payload {
-	username: string;
+	name?: string;
+	tag?: string;
+	type?: ServiceTypeFilters;
+	search?: string;
+	data?: ServiceModel[];
 }
 
 export type ServiceTypeFilters = "owned" | "starred" | "all";
 
 export type AddToFavoriteAction = {
 	type: typeof ADD_TO_FAVORITE;
-	payload: {
-		name: string;
-	};
+	payload: Payload;
 };
 
 export type RemoveFromFavoriteAction = {
 	type: typeof REMOVE_FROM_FAVORITE;
-	payload: {
-		name: string;
-	};
+	payload: Payload;
 };
 
 export type AddToTagsFilterAction = {
 	type: typeof ADD_TO_TAGS_FILTER;
-	payload: {
-		tag: string;
-	};
+	payload: Payload;
 };
 
 export type RemoveFromTagsFilterAction = {
 	type: typeof REMOVE_FROM_TAGS_FILTER;
-	payload: {
-		tag: string;
-	};
+	payload: Payload;
 };
 
 export type ChangeTypeFilterAction = {
 	type: typeof CHANGE_TYPE_FILTER;
-	payload: {
-		type: ServiceTypeFilters;
-	};
+	payload: Payload;
 };
 
 export type SearchFilterAction = {
 	type: typeof SEARCH_FILTER;
-	payload: {
-		search: string;
-	};
+	payload: Payload;
 };
 
 export type LoadServicesAction = {
 	type: typeof LOAD_SERVICES;
-	payload: {
-		data: [];
-	};
+	payload: Payload;
 };
 
 export type AppActions =
@@ -118,7 +109,7 @@ export const searchFilter = (s: string): SearchFilterAction => ({
 	},
 });
 
-export const loadServices = (data: string[]): LoadServicesAction => ({
+export const loadServices = (data: ServiceModel[]): LoadServicesAction => ({
 	type: LOAD_SERVICES,
 	payload: {
 		data,

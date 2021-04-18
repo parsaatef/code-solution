@@ -9,7 +9,7 @@ import { ThemeProvider as StyledComponentProvider } from "styled-components";
 import theme from "../components/styled/theme";
 import Layout from "../components/template/Layout";
 import { Provider } from "../app/store";
-import { reducer, initialState } from "../app/reducer";
+import { reducer, initialState, AppState } from "../app/reducer";
 
 interface Props {
 	Component: ReactElement;
@@ -19,7 +19,12 @@ interface Props {
 const MyApp: React.FC<Props> = (props) => {
 	const { Component, pageProps } = props;
 
-	const [state, dispatch] = React.useReducer(reducer, initialState);
+	const [state, dispatch] = React.useReducer(
+		reducer,
+		pageProps && pageProps.initialAppState
+			? pageProps.initialAppState
+			: initialState
+	);
 
 	React.useEffect(() => {
 		if (typeof window !== "undefined")
@@ -42,6 +47,7 @@ const MyApp: React.FC<Props> = (props) => {
 					content="minimum-scale=1, initial-scale=1, width=device-width"
 				/>
 				<meta name="theme-color" content={theme.palette.primary.main} />
+				<link rel="icon" href="/favicon.ico" />
 				<link
 					rel="preload"
 					href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

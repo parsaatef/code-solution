@@ -3,11 +3,12 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
-import { Order, TableCol } from "./Table";
+import { TableCol } from "./Table";
 import { SortItem } from "./Table.styled";
+import { Order } from "../../../types";
 
 interface Props {
-	onRequestSort: (event: React.MouseEvent, property: string) => void;
+	onRequestSort: (event: React.MouseEvent<unknown>, property: string) => void;
 	order: Order;
 	orderBy: string;
 	cols: TableCol[];
@@ -16,7 +17,7 @@ interface Props {
 const EnhancedTableHead: React.FC<Props> = (props) => {
 	const { order, orderBy, onRequestSort, cols } = props;
 	const createSortHandler = (property: string) => (
-		event: React.MouseEvent
+		event: React.MouseEvent<unknown>
 	) => {
 		onRequestSort(event, property);
 	};

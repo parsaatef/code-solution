@@ -6,7 +6,6 @@ const Website = () => {
 		<div>
 			<Head>
 				<title>Websites</title>
-				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
 				<Box mt={5} pl={3}>

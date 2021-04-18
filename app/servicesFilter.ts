@@ -1,6 +1,18 @@
 import { currentUser } from "../dummyData/data.json";
+import { ServiceModel } from "../types";
+import { ServiceTypeFilters } from "./actions";
+import { AppState } from "./reducer";
 
-export const servicesByTags = (services, tags) => {
+/**
+ * Get services by tags
+ * @param services
+ * @param tags
+ * @returns
+ */
+export const servicesByTags = (
+	services: ServiceModel[],
+	tags: string[]
+): ServiceModel[] => {
 	if (tags.length === 0) {
 		return services;
 	}
@@ -30,7 +42,18 @@ export const servicesByTags = (services, tags) => {
 	return newServices;
 };
 
-export const servicesByType = (services, type, favorites) => {
+/**
+ * Get services by type
+ * @param services
+ * @param type
+ * @param favorites
+ * @returns
+ */
+export const servicesByType = (
+	services: ServiceModel[],
+	type: ServiceTypeFilters,
+	favorites: ServiceModel["name"][]
+): ServiceModel[] => {
 	const newServices = [];
 
 	switch (type) {
@@ -70,7 +93,16 @@ export const servicesByType = (services, type, favorites) => {
 	return newServices;
 };
 
-export const servicesBySearch = (services, search) => {
+/**
+ * Get services by search
+ * @param services
+ * @param search
+ * @returns
+ */
+export const servicesBySearch = (
+	services: ServiceModel[],
+	search: string
+): ServiceModel[] => {
 	if (!search) {
 		return services;
 	}
@@ -97,10 +129,13 @@ export const servicesBySearch = (services, search) => {
 	return newServices;
 };
 
-export const getFilteredServices = (state) => {
+/**
+ * Filter Services by tags, type and search
+ * @param state
+ * @returns
+ */
+export const getFilteredServices = (state: AppState): ServiceModel[] => {
 	const { favorites, tagsFilter, typeFilter, search, allServices } = state;
-
-	console.log("---tagsFilter---", tagsFilter, state);
 
 	let filteredServices = servicesByTags(allServices, tagsFilter);
 	filteredServices = servicesByType(filteredServices, typeFilter, favorites);

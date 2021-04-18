@@ -1,21 +1,22 @@
-import EnhancedTable from "../components/ui/table/Table";
-import { useAppState } from "../app/store";
+import EnhancedTable, { TableCol } from "../../components/ui/table/Table";
+import { useAppState } from "../../app/store";
 import { Fragment, useEffect } from "react";
 import ServiceTableActions from "./ServiceTableActions";
-import ServiceSearchFilter from "./ServiceSearchFilter";
-import { loadServices } from "../app/actions";
+import ServiceSearchFilter from "../search/ServiceSearchFilter";
+import { loadServices } from "../../app/actions";
 import { LinkLabel, TagChip } from "./ServiceTable.styled";
 import Link from "next/link";
+import { ServiceModel } from "../../types";
 
-const columns = [
+const columns: TableCol[] = [
 	{
 		id: "name",
 		numeric: false,
 		disablePadding: false,
 		label: "Name",
 		align: "left",
-		value: (row) => (
-			<Link href={`service/${row.name}/overview`}>
+		value: (row: ServiceModel) => (
+			<Link href={`/service/${row.name}/overview`}>
 				<LinkLabel>{row.name}</LinkLabel>
 			</Link>
 		),
@@ -26,8 +27,8 @@ const columns = [
 		disablePadding: false,
 		label: "System",
 		align: "left",
-		value: (row) => (
-			<Link href={`system/${row.system}`}>
+		value: (row: ServiceModel) => (
+			<Link href={`/system/${row.system}`}>
 				<LinkLabel>{row.system}</LinkLabel>
 			</Link>
 		),
@@ -38,8 +39,8 @@ const columns = [
 		disablePadding: false,
 		label: "Owner",
 		align: "left",
-		value: (row) => (
-			<Link href={`owner/${row.owner}`}>
+		value: (row: ServiceModel) => (
+			<Link href={`/owner/${row.owner}`}>
 				<LinkLabel>{row.owner}</LinkLabel>
 			</Link>
 		),
@@ -66,11 +67,16 @@ const columns = [
 		disablePadding: false,
 		label: "Tag",
 		align: "left",
-		value: (row) => {
+		value: (row: ServiceModel) => {
 			return (
 				<Fragment>
 					{row.tags.map((tag) => (
-						<TagChip size="small" variant="outlined" label={tag} />
+						<TagChip
+							key={tag}
+							size="small"
+							variant="outlined"
+							label={tag}
+						/>
 					))}
 				</Fragment>
 			);
@@ -82,7 +88,7 @@ const columns = [
 		disablePadding: false,
 		label: "Action",
 		align: "left",
-		value: (row) => <ServiceTableActions row={row} />,
+		value: (row: ServiceModel) => <ServiceTableActions row={row} />,
 	},
 ];
 
@@ -101,12 +107,14 @@ const filters = [
 	},
 ];
 
-const ServicesTableContainer = (props) => {
+interface Props {
+	data: ServiceModel[];
+}
+
+const ServicesTableContainer: React.FC<Props> = (props) => {
 	const { data } = props;
 
 	const { state, dispatch } = useAppState();
-
-	console.log("state----", state);
 
 	const { services, typeFilter } = state;
 

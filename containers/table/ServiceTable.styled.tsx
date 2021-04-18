@@ -1,5 +1,6 @@
 import Chip from "@material-ui/core/Chip";
 import styled from "styled-components";
+import { ThemeProps } from "../../types";
 
 export const TagChip = styled(Chip)`
 	margin-right: 4px;
@@ -7,6 +8,8 @@ export const TagChip = styled(Chip)`
 `;
 
 export const LinkLabel = styled.span`
-	color: #2e76d0;
-	cursor: pointer;
+	${({ theme }: ThemeProps) => `
+		color: ${theme.palette.secondary.main};
+		cursor: pointer;
+	`}
 `;

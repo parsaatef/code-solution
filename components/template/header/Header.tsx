@@ -1,28 +1,22 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
-import styled from "styled-components";
-import { useRouter } from "next/router";
+import { HeaderBack } from "./Header.styled";
 
-const HeaderBack = styled(AppBar)`
-	background: linear-gradient(45deg, #1c7658 30%, #49b6a2 90%);
-	padding: 30px 20px 20px;
-`;
+export interface Props {
+	title: string;
+}
 
-export default function Header() {
-	const router = useRouter();
-
-	const { serviceId } = router.query;
-
-	console.log("---router.query---", router);
-	//router.asPath
+const Header: React.FC<Props> = (props) => {
+	const { title } = props;
 
 	return (
-		<HeaderBack position="static">
-			<Typography variant="h4">
-				{serviceId ? serviceId : "Buorre beaivvi, Guest!e"}
+		<HeaderBack position="static" data-test="component-header">
+			<Typography variant="h4" data-test="component-title">
+				{title || "Buorre beaivvi, Guest!e"}
 			</Typography>
 			<Typography variant="body2">Backstage Service Catalog</Typography>
 		</HeaderBack>
 	);
-}
+};
+
+export default Header;

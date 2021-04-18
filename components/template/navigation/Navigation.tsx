@@ -1,11 +1,24 @@
 import React from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Box from "@material-ui/core/Box";
-import Link from "next/link";
-import { TabsNavigation, TabMenuItem } from "./Navigation.styled";
+import { TabsNavigation } from "./Navigation.styled";
+import NavigationItem from "./NavigationItem";
 
-export default function SimpleTabs() {
-	const [value, setValue] = React.useState(0);
+export interface NavItem {
+	href: string;
+	text: React.ReactNode;
+	id: string;
+}
+
+interface Props {
+	items: NavItem[];
+	currentPath: string;
+}
+
+const Navigation: React.FC<Props> = (props) => {
+	const { items, currentPath } = props;
+
+	const [value, setValue] = React.useState<number | false>(false);
 
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
 		setValue(newValue);
@@ -19,22 +32,20 @@ export default function SimpleTabs() {
 					onChange={handleChange}
 					aria-label="simple tabs example"
 				>
-					<TabMenuItem
-						label={<Link href="/service">Services</Link>}
-					/>
-					<TabMenuItem
-						label={<Link href="/website">Websites</Link>}
-					/>
-					<TabMenuItem
-						label={<Link href="/library">Libraries</Link>}
-					/>
-					<TabMenuItem
-						label={
-							<Link href="/documentation">Documentations</Link>
-						}
-					/>
+					{items.map(({ href, text, id }, index) => (
+						<NavigationItem
+							key={id}
+							href={href}
+							text={text}
+							index={index}
+							setValue={setValue}
+							currentPath={currentPath}
+						/>
+					))}
 				</Tabs>
 			</TabsNavigation>
 		</Box>
 	);
-}
+};
+
+export default Navigation;

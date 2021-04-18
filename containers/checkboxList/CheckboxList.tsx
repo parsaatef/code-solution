@@ -1,62 +1,21 @@
 import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
 import { Fragment } from "react";
 import Box from "@material-ui/core/Box";
 import { Divider, Typography } from "@material-ui/core";
-import { TextCapitalized } from "./CheckBoxList.styled";
+import { TextCapitalized } from "../../components/styled/general";
 import { tags } from "../../dummyData/data.json";
 import { useAppState } from "../../app/store";
 import { addToTagsFilter, removeFromTagsFilter } from "../../app/actions";
+import ControlledCheckBox from "./ControlledCheckBox";
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			width: "100%",
-			maxWidth: 360,
-		},
-	})
-);
-
-const ControlledCheckBox = (props) => {
-	const { defaultChecked, labelId } = props;
-
-	const [checked, setChecked] = React.useState(false);
-
-	React.useEffect(() => {
-		if (defaultChecked !== checked) {
-			setChecked(defaultChecked);
-		}
-	}, [defaultChecked]);
-
-	const handleChange = (e) => {
-		setChecked(e.target.checked);
-	};
-
-	return (
-		<Checkbox
-			edge="start"
-			checked={checked}
-			onChange={handleChange}
-			tabIndex={-1}
-			disableRipple
-			inputProps={{ "aria-labelledby": labelId }}
-		/>
-	);
-};
-
-export default function CheckboxList() {
-	const classes = useStyles();
-
+const CheckboxList = () => {
 	const { state, dispatch } = useAppState();
 
 	const { tagsFilter } = state;
-
-	console.log("---tagsFilter----", tagsFilter);
 
 	const handleToggle = (value: string) => {
 		const currentIndex = tagsFilter.indexOf(value);
@@ -95,7 +54,7 @@ export default function CheckboxList() {
 				Tags
 			</Typography>
 
-			<List className={classes.root}>
+			<List>
 				{tags.map((value) => {
 					const labelId = `checkbox-list-label-${value}`;
 
@@ -122,4 +81,6 @@ export default function CheckboxList() {
 			</List>
 		</Fragment>
 	);
-}
+};
+
+export default CheckboxList;
